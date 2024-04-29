@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+COLUMNS_MAP = {
+    "Zeit": "Time",
+    "Saldo vor": "Balance Before",
+    "Saldo nach": "Balance After",
+    "Aktion": "Action",
+    # Zeit,Saldo vor,Saldo nach,P&L,Aktion
+    # Time,Balance Before,Balance After,P&L,Action
+}
+
 def plot(df, inital_equity=100_000):
     fig = px.line(df, x='Time', y='Equity')
     fig.update_layout(xaxis_tickangle=-75)
@@ -13,6 +22,9 @@ def plot(df, inital_equity=100_000):
 
 def analyze_df(data):
     df_account_history = pd.read_csv(data)
+    # check if a specific column exists
+    if 'Balance After' not in df_account_history.columns:
+        df_account_history.rename(columns=COLUMNS_MAP, inplace=True)
     df_account_history['Time'] = pd.to_datetime(df_account_history['Time'])
     df_account_history.rename(columns={"Balance After": "Equity"}, inplace=True)
     df_account_history.drop(columns=['Balance Before'], inplace=True)
@@ -22,7 +34,7 @@ def analyze_df(data):
     return df_account_history
 
 
-st.set_page_config(page_title="TV Equity", layout="centered", initial_sidebar_state="auto")
+st.set_page_config(page_title="TV Equity", layout="centered", initial_sidebar_state="auto")#
 
 uploaded_file = st.file_uploader("Upload TV Account History CSV file:", type="csv")
 
