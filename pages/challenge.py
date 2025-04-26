@@ -144,10 +144,9 @@ def run_app():
 
     
     uploaded_file = st.file_uploader(
-        'Upload TradingView CSV export file (Account History/"Kontoverlauf")',
+        'Upload TradingView CSV export file (Account History/"Kontoverlauf") - see help on the left',
         type="csv"
     )
-    st.write('See help on the left on how to export your data from TradingView.')
 
     ignore_first_trade = st.toggle('Ignore first trade for calculations.', value=True)
     #ignore_commission = st.toggle('Ignore commission for calculations.', value=True)
