@@ -20,6 +20,12 @@ COLUMNS_MAP = {
     # Zeit,Saldo vor,Saldo nach,Realisierter G&V (Wert),Realisierter G&V (Währung),Aktion
     # Time,Balance Before,Balance After,Realized P&L (value),Realized P&L (currency),Action
 }
+COLUMNS_MAP_EN = {
+    "Realized P&L (value)":"P&L (value)",
+    "Realized P&L (currency)": "P&L (currency)",
+    # Zeit,Saldo vor,Saldo nach,Realisierter G&V (Wert),Realisierter G&V (Währung),Aktion
+    # Time,Balance Before,Balance After,Realized P&L (value),Realized P&L (currency),Action
+}
 
 def plot(df, init_equity=100_000):
     fig = px.line(df, x='Time', y='Equity')
@@ -46,6 +52,9 @@ def analyze_df(df_account_history):
     # check if a specific column exists
     if 'Balance After' not in df_account_history.columns:
         df_account_history.rename(columns=COLUMNS_MAP, inplace=True)
+    else:
+        # rename columns to match the expected format
+        df_account_history.rename(columns=COLUMNS_MAP_EN, inplace=True)
     df_account_history['Time'] = pd.to_datetime(df_account_history['Time'])
     df_account_history.rename(columns={"Balance After": "Equity"}, inplace=True)
     df_account_history.drop(columns=['Balance Before'], inplace=True)
