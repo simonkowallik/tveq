@@ -153,7 +153,7 @@ def run_app():
 
     
     uploaded_file = st.file_uploader(
-        'Upload TradingView CSV export file (Account History/"Kontoverlauf") - see help on the left',
+        'Upload TradingView CSV export file (Balance History/Guthabenübersicht) - see help on the left',
         type="csv"
     )
 
