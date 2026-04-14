@@ -148,7 +148,7 @@ def run_app():
         initial_sidebar_state="auto",
         page_icon="📈",
     )
-    st.title('🏁 Level 5 Challenge - 2025')
+    st.title('🏁 Level 5 Challenge - 2026')
 
 
     
